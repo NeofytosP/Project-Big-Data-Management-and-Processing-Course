@@ -98,26 +98,26 @@ CREATE TABLE track_features (
                             );                      
 
 ###  MongoDB Schema
-#{
-#       "_id": id,   # use track_id as MongoDB _id
-#        "track_name": string,
-#        "artist_name": string,
-#        "release_year": int,
-#        "genre": string,
-#        "popularity": int,
-#        "duration_ms": int,
-#        "metrics": {
-#            "danceability": float,
-#            "energy": float,
-#            "key": int,
-#            "loudness": float),
-#            "mode": int),
-#            "speechiness": float),
-#            "acousticness": float,
-#            "instrumentalness": float,
-#            "liveness": float,
-#            "valence": float,
-#            "tempo": float),
-#            "time_signature": int)
-#        }
-#    }
+{                                                                                                         
+       "_id": id,   # use track_id as MongoDB _id                                                                                                         
+        "track_name": string,                                                                                                         
+        "artist_name": string,                                                                                                         
+        "release_year": int,                                                                                                         
+        "genre": string,                                                                                                         
+        "popularity": int,                                                                                                         
+        "duration_ms": int,                                                                                                         
+        "metrics": {                                                                                                         
+            "danceability": float,                                                                                                         
+            "energy": float,                                                                                                         
+            "key": int,                                                                                                         
+            "loudness": float),                                                                                                         
+            "mode": int),                                                                                                         
+            "speechiness": float),                                                                                                         
+            "acousticness": float,                                                                                                         
+            "instrumentalness": float,                                                                                                         
+            "liveness": float,                                                                                                         
+            "valence": float,                                                                                                         
+            "tempo": float),                                                                                                         
+            "time_signature": int)                                                                                                         
+            }                                                                                                         
+         }                                                                                                         
