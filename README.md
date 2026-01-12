@@ -11,9 +11,11 @@ The objective as proposed was to analyze Spotify Data. To try and analyze the tr
 In this project the Data that are being used act as a Sample from the huge volume of Spotify Data that exist in order to compare the two schemas.
 
 
-In this project 3 databases are being used, a MySQL database , a MongoDB database that is being created local in my computer machine so it will use same resources as MySQL and a MongoDB atlas free cluster (a free cloud database where MongoDB offer limited resource)
+Three databases are being used, a MySQL database , a MongoDB database that is being created local in my computer machine so it will use same resources as MySQL and a MongoDB atlas free cluster (a free cloud database where MongoDB offer limited resource)
 
 MongoDB is chosen to be used locally because when response time is being calculated on the cloud database latency will also affect response time while also the free cluster will not use same recourses as the MySQL that will be using my computer's resources. 
+
+Then queries are being designed to compare the databases for different cases.
 
 ## 2. Data Challenges
 The data in this project involve in 3 Big Data Dimensions
@@ -62,6 +64,9 @@ The data are already cleaned and prepared in order to be utilized for research p
 A small preview can be found here [Dataset](Dataset)
 ## 4. Databases Schemas
 ### MySQL Schema
+MySQL contains 3 tables, one table with the artists, one with the tracks and one with the track features
+
+
 CREATE SCHEMA 'spotify' ;
 
 
@@ -151,3 +156,22 @@ The cloud database will use the same schema as the local database but because of
 - release_year
 - genre
 - popularity
+
+## 5. Project
+This project makes 8 comparisons between the databases. Different type of queries are being designed and compare the database in each comparison phase.
+### Comparison 1.
+First the insertion time is being compared for each database
+### Comparison 2 and 3.
+MySQL contains 3 tables, 2 main tables with tracks and trackfeatures.
+
+These two comparisons are to check the response time for querying separately each table
+### Comparison 4
+Here the databases are being compared for retrieving all the data
+### Comparison 5
+The databases are being compared for Simple Queries
+### Comparison 6
+The databases are being compared for Filter Queries
+### Comparison 7 
+The databases are being compared for Range Queries
+### Comparison 8
+The databases are being compared for Aggregations
