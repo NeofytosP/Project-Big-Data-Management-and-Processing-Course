@@ -10,11 +10,11 @@ The objective as proposed was to analyze Spotify Data. To try and analyze the tr
 In this project the Data that are being used act as a Sample from the huge volume of Spotify Data that exist in order to compare the two schemas.
 
 ## 2. Data Challenges
--  **Volume**
+-  **Volume**                                                                                                                                                                                                                                                                              
    Spotify contains over 100 million songs, new songs are being added every day.
 - **Velocity**
 - **Variety**
-
+                                             
 Spotify contains over 100 million songs, new songs are being added every day.
 
 SSpotify contains a
