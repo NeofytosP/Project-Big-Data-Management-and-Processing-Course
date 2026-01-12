@@ -55,11 +55,11 @@ The data are already cleaned and prepared in order to be utilized for research p
 
 A small preview can be found here [Dataset](Dataset)
 ## 4. Databases Schemas
-### MySQL
-CREATE SCHEMA `spotify` ;
+### MySQL Schema
+CREATE SCHEMA 'spotify' ;
 
 
-USE `spotify`;
+USE 'spotify';
 
 
 CREATE TABLE artists (                                                                                                                                                                                                        
@@ -95,4 +95,29 @@ CREATE TABLE track_features (
                             tempo FLOAT,                                                                                                                                                                                                        
                             time_signature INT,                                                                                                                                                                                                        
                             FOREIGN KEY (track_id) REFERENCES tracks(track_id)                                                                                                                                                                                                        
-                            );                                                                                                                                                                                                        
+                            );                      
+
+###  MongoDB Schema
+#{
+#       "_id": id,   # use track_id as MongoDB _id
+#        "track_name": string,
+#        "artist_name": string,
+#        "release_year": int,
+#        "genre": string,
+#        "popularity": int,
+#        "duration_ms": int,
+#        "metrics": {
+#            "danceability": float,
+#            "energy": float,
+#            "key": int,
+#            "loudness": float),
+#            "mode": int),
+#            "speechiness": float),
+#            "acousticness": float,
+#            "instrumentalness": float,
+#            "liveness": float,
+#            "valence": float,
+#            "tempo": float),
+#            "time_signature": int)
+#        }
+#    }
