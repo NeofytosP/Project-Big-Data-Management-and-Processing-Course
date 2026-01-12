@@ -144,7 +144,7 @@ With indexes being created for:
 
 
 ### Cloud MongoDB Schema
-The cloud database will use the same schema as the local database but because of resources limitations indexes are created only for:
+The cloud database will use the same schema as the local database but because of resources limitations only 1 million data are being stored and indexes are created only for:
 
 
 - artist_name
