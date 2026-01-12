@@ -1,4 +1,5 @@
 # Project Big Data Management and Processing Course
+# MySQL Schema and MongoDB Schema Benchmark
 
 ## 1. Overview 
 This is a semester project for course COMP-548DL – Big Data Management and Processing
