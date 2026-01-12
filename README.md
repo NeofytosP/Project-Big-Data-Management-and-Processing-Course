@@ -9,6 +9,11 @@ The objective as proposed was to analyze Spotify Data. To try and analyze the tr
 
 In this project the Data that are being used act as a Sample from the huge volume of Spotify Data that exist in order to compare the two schemas.
 
+
+In this project 3 databases are being used, a MySQL database , a MongoDB database that is being created local in my computer machine so it will use same resources as MySQL and a MongoDB atlas free cluster (a free cloud database where MongoDB offer limited resource)
+
+MongoDB is chosen to be used locally because when response time is being calculated on the cloud database latency will also affect response time while also the free cluster will not use same recourses as the MySQL that will be using my computer's resources. 
+
 ## 2. Data Challenges
 The data in this project involve in 3 Big Data Dimensions
 -  **Volume**                                                                                                                                                                                                                                                                              
@@ -98,8 +103,11 @@ CREATE TABLE track_features (
                             );                      
 
 ###  MongoDB Schema
+The id of each document will be the track id instead of the id set by MongoDB 
+
+
 {                                                                                                         
-       "_id": id,   # use track_id as MongoDB _id                                                                                                         
+       "_id": id,                                                                                                                                                                                                                  
         "track_name": string,                                                                                                         
         "artist_name": string,                                                                                                         
         "release_year": int,                                                                                                         
@@ -120,4 +128,6 @@ CREATE TABLE track_features (
             "tempo": float),                                                                                                         
             "time_signature": int)                                                                                                         
             }                                                                                                         
-         }                                                                                                         
+         }     
+   
+With indexes being created 
