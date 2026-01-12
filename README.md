@@ -62,37 +62,37 @@ CREATE SCHEMA `spotify` ;
 USE `spotify`;
 
 
-CREATE TABLE artists (
-                      artist_id VARCHAR(50) PRIMARY KEY,
-                      artist_name VARCHAR(50)
+CREATE TABLE artists (                                                                                                                                                                                                        
+                      artist_id VARCHAR(50) PRIMARY KEY,                                                                                                                                                                                                        
+                      artist_name VARCHAR(50)                                                                                                                                                                                                        
                       );
 
 
-CREATE TABLE tracks (
-                     track_id VARCHAR(50) PRIMARY KEY,
-                     track_name VARCHAR(50) NOT NULL,
-                     release_year YEAR,
-                     genre VARCHAR(50),
-                     popularity INT,
-                     duration_ms INT,
-                     artist_id VARCHAR(50),
-                     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
+CREATE TABLE tracks (                                                                                                                                                                                                        
+                     track_id VARCHAR(50) PRIMARY KEY,                                                                                                                                                                                                        
+                     track_name VARCHAR(50) NOT NULL,                                                                                                                                                                                                        
+                     release_year YEAR,                                                                                                                                                                                                        
+                     genre VARCHAR(50),                                                                                                                                                                                                        
+                     popularity INT,                                                                                                                                                                                                        
+                     duration_ms INT,                                                                                                                                                                                                        
+                     artist_id VARCHAR(50),                                                                                                                                                                                                        
+                     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)                                                                                                                                                                                                        
                      );
                      
 
-CREATE TABLE track_features (
-                            track_id VARCHAR(50) PRIMARY KEY,
-                            danceability FLOAT,
-                            energy FLOAT,
-                            `key` INT,
-                            loudness FLOAT,
-                            `mode` INT,
-                            speechiness FLOAT,
-                            acousticness FLOAT,
-                            instrumentalness FLOAT,
-                            liveness FLOAT,
-                            valence FLOAT,
-                            tempo FLOAT,
-                            time_signature INT,
-                            FOREIGN KEY (track_id) REFERENCES tracks(track_id)
-                            );
+CREATE TABLE track_features (                                                                                                                                                                                                                                                                                        
+                            track_id VARCHAR(50) PRIMARY KEY,                                                                                                                                                                                                                                
+                            danceability FLOAT,                                                                                                                                                                                                        
+                            energy FLOAT,                                                                                                                                                                                                        
+                            `key` INT,                                                                                                                                                                                                        
+                            loudness FLOAT,                                                                                                                                                                                                        
+                            `mode` INT,                                                                                                                                                                                                        
+                            speechiness FLOAT,                                                                                                                                                                                                        
+                            acousticness FLOAT,                                                                                                                                                                                                        
+                            instrumentalness FLOAT,                                                                                                                                                                                                        
+                            liveness FLOAT,                                                                                                                                                                                                        
+                            valence FLOAT,                                                                                                                                                                                                        
+                            tempo FLOAT,                                                                                                                                                                                                        
+                            time_signature INT,                                                                                                                                                                                                        
+                            FOREIGN KEY (track_id) REFERENCES tracks(track_id)                                                                                                                                                                                                        
+                            );                                                                                                                                                                                                        
