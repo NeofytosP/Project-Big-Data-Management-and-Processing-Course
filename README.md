@@ -102,7 +102,7 @@ CREATE TABLE track_features (
                             FOREIGN KEY (track_id) REFERENCES tracks(track_id)                                                                                                                                                                                                        
                             );                      
 
-###  MongoDB Schema
+### Local MongoDB Schema
 The id of each document will be the track id instead of the id set by MongoDB 
 
 
@@ -130,4 +130,23 @@ The id of each document will be the track id instead of the id set by MongoDB
             }                                                                                                         
          }     
    
-With indexes being created 
+With indexes being created for:
+
+
+- track_name
+- artist_name
+- release_year
+- genre
+- popularity
+- duration_ms
+- metrics.energy
+
+
+### Cloud MongoDB Schema
+The cloud database will use the same schema as the local database but because of resources limitations indexes are created only for:
+
+
+- artist_name
+- release_year
+- genre
+- popularity
