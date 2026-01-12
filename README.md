@@ -175,3 +175,6 @@ The databases are being compared for Filter Queries
 The databases are being compared for Range Queries
 ### Comparison 8
 The databases are being compared for Aggregations
+## 6. Project Reproducibility
+This project can easily be reproduced.
+All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases
