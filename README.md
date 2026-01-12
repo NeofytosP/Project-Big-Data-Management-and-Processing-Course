@@ -11,11 +11,10 @@ In this project the Data that are being used act as a Sample from the huge volum
 
 ## 2. Data Challenges
 -  **Volume**
-    Spotify contains over 100 million songs, new songs are being added every day.
+  Spotify contains over 100 million songs, new songs are being added every day.
 - **Velocity**
 - **Variety**
-- **Volume**  
-  Multi-year historical market data is persistently stored across multiple assets, resulting in a continuously growing time-series dataset.
+
 Spotify contains over 100 million songs, new songs are being added every day.
 
 SSpotify contains a
