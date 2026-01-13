@@ -106,7 +106,9 @@ CREATE TABLE track_features (
                             tempo FLOAT,                                                                                                                                                                                                        
                             time_signature INT,                                                                                                                                                                                                        
                             FOREIGN KEY (track_id) REFERENCES tracks(track_id)                                                                                                                                                                                                        
-                            );                      
+                            );             
+
+With indexes on track_name, release_year, genre and popularity
 
 ### Local MongoDB Schema
 The id of each document will be the track id instead of the id set by MongoDB 
