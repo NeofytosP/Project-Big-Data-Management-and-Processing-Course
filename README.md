@@ -163,24 +163,42 @@ The cloud database will use the same schema as the local database but because of
 The whole code can be found here [Code](Benchmark/Benchmark.ipynb)
 
 This project makes 8 comparisons between the databases. Different type of queries are being designed to compare the databases in each comparison phase. More queries could be used and added in the future for more accurate results and to test bigger range of queries
+
+For each phase there is a hyperlink that directs to that specific phase.
 ### Comparison 1.
 First the insertion time is being compared for each database
+
+[Insertion](Benchmark/1.Insertion-of-data-into-the-databases.md)
 ### Comparison 2 and 3.
 MySQL contains 3 tables, 2 main tables with tracks and trackfeatures.
 
 These two comparisons are to check the response time for querying separately each table
+
+[Table Comparison](Benchmark/2.Retrieving-Tables.md)
 ### Comparison 4
 Here the databases are being compared for retrieving all the data
+
+[Retrieve all data](Benchmark/3.Retrieving-all-Data.md)
 ### Comparison 5
 The databases are being compared for Simple Queries
+
+[Simple Queries Comparison](Benchmark/4.Simple-Queries.md)
 ### Comparison 6
 The databases are being compared for Filter Queries
+
+[Filter Queries Comparison](Benchmark/5.Filter-Queries.md)
 ### Comparison 7 
 The databases are being compared for Range Queries
+
+[Range Queries Comparison](Benchmark/6.Range-Queries.md)
 ### Comparison 8
 The databases are being compared for Aggregations
+
+[Aggregations Comparison](Benchmark/7.Aggregations.md)
 ### 
 Then results are being visualized and conclusions based on the results
+
+[Results](Benchmark/8.Results-Conclusions.md)
 ## 6. Project Reproducibility
 This project can easily be reproduced.
 All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases. [Libraries](Benchmark/0.Libraries-and-Connection.md)
