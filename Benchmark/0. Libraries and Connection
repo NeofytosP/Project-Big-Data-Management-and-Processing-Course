@@ -1,0 +1,114 @@
+```python
+import mysql.connector
+from pymongo import MongoClient
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import time
+import numpy as np
+```
+```python
+
+```
+
+# Connection
+
+MY SQL Connection
+
+
+```python
+MySQL = mysql.connector.connect(
+    host="localhost",
+    user="neofytos",
+    passwd="neo3111999",
+    database="spotify"
+)
+
+MyCursor = MySQL.cursor()
+
+print(MySQL)
+```
+
+    <mysql.connector.connection_cext.CMySQLConnection object at 0x00000271F9BF2990>
+    
+
+
+```python
+MyCursor.execute("SHOW TABLES")
+for x in MyCursor:
+  print(x)
+```
+
+    ('artists',)
+    ('track_features',)
+    ('tracks',)
+    
+
+Local MongoDB Connection
+
+
+```python
+connection_string = 'mongodb://localhost:27017/'
+MongoDB = MongoClient(connection_string)
+Database = MongoDB.spotify
+print(MongoDB)
+```
+
+    MongoClient(host=['localhost:27017'], document_class=dict, tz_aware=False, connect=True)
+    
+
+
+
+
+```python
+Collections = Database.list_collection_names()
+Collections
+```
+
+
+
+
+    ['songs_collection']
+
+
+
+
+```python
+songs_collection = Database.songs_collection
+```
+
+
+```python
+
+```
+
+Cloud MongoDB Connection
+
+
+```python
+cloud_connection_string = 'mongodb+srv://giorgosf3_db_user:neofytos@projectspotify.8eqggrk.mongodb.net/?appName=ProjectSpotify'
+MongoDB_Cloud = MongoClient(cloud_connection_string)
+Cloud_Database = MongoDB_Cloud.spotify
+print(MongoDB_Cloud)
+```
+
+    MongoClient(host=['ac-vh70i43-shard-00-01.8eqggrk.mongodb.net:27017', 'ac-vh70i43-shard-00-00.8eqggrk.mongodb.net:27017', 'ac-vh70i43-shard-00-02.8eqggrk.mongodb.net:27017'], document_class=dict, tz_aware=False, connect=True, appname='ProjectSpotify', authsource='admin', replicaset='atlas-7yvjfw-shard-0', tls=True)
+    
+
+
+```python
+Cloud_Collections = Cloud_Database.list_collection_names()
+Cloud_Collections
+```
+
+
+
+
+    ['cloud_songs_collection']
+
+
+
+
+```python
+cloud_songs_collection = Cloud_Database.cloud_songs_collection
+```
