@@ -161,6 +161,7 @@ The cloud database will use the same schema as the local database but because of
 
 ## 5. Project
 The whole code can be found here [Code](Benchmark)
+
 This project makes 8 comparisons between the databases. Different type of queries are being designed to compare the databases in each comparison phase. More queries could be used and added in the future for more accurate results and to test bigger range of queries
 ### Comparison 1.
 First the insertion time is being compared for each database
