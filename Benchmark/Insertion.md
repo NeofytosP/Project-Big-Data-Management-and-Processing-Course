@@ -1,0 +1,307 @@
+## 1 Insert data to database Performance
+
+Because I already stored them in both MySQL and MongoDB Atlas cluster I will check insert performance adding them on new MongoDB cluster and Database
+
+**MongoDB:**
+
+
+```python
+
+#{
+#       "_id": id,   # use track_id as MongoDB _id
+#        "track_name": string,
+#        "artist_name": string,
+#        "release_year": int,
+#        "genre": string,
+#        "popularity": int,
+#        "duration_ms": int,
+#        "metrics": {
+#            "danceability": float,
+#            "energy": float,
+#            "key": int,
+#            "loudness": float),
+#            "mode": int),
+#            "speechiness": float),
+#            "acousticness": float,
+#            "instrumentalness": float,
+#            "liveness": float,
+#            "valence": float,
+#            "tempo": float),
+#            "time_signature": int)
+#        }
+#    }
+```
+
+
+```python
+# Connection String
+InsertPerformance_connection_string = 'mongodb://localhost:27017/'
+InserPerformance_Client = MongoClient(InsertPerformance_connection_string)
+
+df = pd.read_csv("spotify_data.csv")
+df = df.drop('Unnamed: 0', axis=1)
+
+
+docs = []
+
+for _, row in df.iterrows():
+    doc = {
+        "_id": row["track_id"],
+        "track_name": row["track_name"],
+        "artist_name": row["artist_name"],
+        "release_year": int(row["year"]),
+        "genre": row["genre"],
+        "popularity": int(row["popularity"]),
+        "duration_ms": int(row["duration_ms"]),
+        "metrics": {
+            "danceability": float(row["danceability"]),
+            "energy": float(row["energy"]),
+            "key": int(row["key"]),
+            "loudness": float(row["loudness"]),
+            "mode": int(row["mode"]),
+            "speechiness": float(row["speechiness"]),
+            "acousticness": float(row["acousticness"]),
+            "instrumentalness": float(row["instrumentalness"]),
+            "liveness": float(row["liveness"]),
+            "valence": float(row["valence"]),
+            "tempo": float(row["tempo"]),
+            "time_signature": int(row["time_signature"])
+        }
+    }
+    docs.append(doc)
+# Creating Database
+spotify = InserPerformance_Client.spotify
+# Create Database's collection
+songs_collection = spotify.songs_collection
+```
+
+
+```python
+start = time.perf_counter()
+# Create index
+songs_collection.insert_many(docs)
+songs_collection.create_index("track_name")
+songs_collection.create_index("artist_name")
+songs_collection.create_index("release_year")
+songs_collection.create_index("genre")
+songs_collection.create_index("popularity")
+songs_collection.create_index("duration_ms")
+songs_collection.create_index("metrics.energy")
+end = time.perf_counter()
+
+print(f'Around {((end - start)/60)} minutes')
+LocalMongoDB_InsertTime = end - start
+```
+
+    Around 0.3124665650000679 minutes
+    
+
+**MySQL**
+
+
+```python
+#CREATE SCHEMA `performance` ;
+
+#USE `performance`;
+
+#CREATE TABLE artists (
+#artist_id VARCHAR(50) PRIMARY KEY,
+#artist_name VARCHAR(50));
+
+#CREATE TABLE tracks (
+#track_id VARCHAR(50) PRIMARY KEY,
+#track_name VARCHAR(50) NOT NULL,
+#release_year YEAR,
+#genre VARCHAR(50),
+#popularity INT,
+#duration_ms INT,
+#artist_id VARCHAR(50),
+#FOREIGN KEY (artist_id) REFERENCES artists(artist_id));
+
+#CREATE TABLE track_features (
+#track_id VARCHAR(50) PRIMARY KEY,
+#danceability FLOAT,
+#energy FLOAT,
+#`key` INT,
+#loudness FLOAT,
+#`mode` INT,
+#speechiness FLOAT,
+#acousticness FLOAT,
+#instrumentalness FLOAT,
+#liveness FLOAT,
+#valence FLOAT,
+#tempo FLOAT,
+#time_signature INT,
+#FOREIGN KEY (track_id) REFERENCES tracks(track_id));
+```
+
+In MySQL Database there are 3 tables `artists` , `tracks` and `track_features`
+
+
+```python
+# Changing Unnamed 0 to artist id and assigning a number from 1 to 64k for each unique artist
+df = pd.read_csv("spotify_data.csv")
+df = df.rename(columns={'Unnamed: 0': 'artist_id'})
+artists1 = list(df['artist_name'].unique())
+dic = {artist: i for i, artist in enumerate(artists1)}
+df['artist_id'] = df['artist_name'].apply(lambda x: dic[x] )
+```
+
+
+```python
+artists = df[['artist_id','artist_name']]
+tracks = df[['track_id','track_name','year','genre','popularity','duration_ms','artist_id']]
+track_features = df[['track_id','danceability','energy','key','loudness','mode','speechiness','acousticness','instrumentalness','liveness','valence','tempo','time_signature']]
+```
+
+
+```python
+MySQL_Performance = mysql.connector.connect(
+    host="localhost",
+    user="neofytos",
+    passwd="neo3111999",
+    database="spotify"
+)
+
+InsertCursor = MySQL_Performance.cursor()
+```
+
+
+```python
+InsertCursor.execute('USE spotify')
+```
+
+
+```python
+start = time.perf_counter()
+
+for i, row in artists.drop_duplicates().iterrows():
+    artist_id = row['artist_id']
+    artist_name = str(row['artist_name'])
+    sql = "INSERT IGNORE INTO artists (artist_id, artist_name) VALUES (%s, %s)"
+    val = (artist_id, artist_name)
+    InsertCursor.execute(sql, val)
+
+MySQL_Performance.commit()
+
+tracks = df[['track_id','track_name','year','genre','popularity','duration_ms','artist_id']]
+for i, row in tracks.iterrows():
+
+    track_id = row['track_id']
+    track_name = str(row['track_name'])
+    year = row['year']
+    genre = str(row['genre'])
+    popularity = row['popularity']
+    duration_ms = row['duration_ms']
+    artist_id = str(row['artist_id'])
+    sql = "INSERT IGNORE INTO tracks (track_id, track_name,release_year,genre,popularity,duration_ms,artist_id ) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    val = (track_id, track_name,year,genre,popularity,duration_ms,artist_id)
+    InsertCursor.execute(sql, val)
+
+MySQL_Performance.commit()
+
+for i, row in track_features.iterrows():
+
+    track_id = str(row['track_id'])
+    danceability = row['danceability']
+    energy = row['energy']
+    key = row['key']
+    loudness = row['loudness']
+    mode = row['mode']
+    speechiness = row['speechiness']
+    acousticness = row['acousticness']
+    instrumentalness = row['instrumentalness']
+    liveness = row['liveness']
+    valence = row['valence']
+    tempo = row['tempo']
+    time_signature = row['time_signature']
+    sql = "INSERT IGNORE INTO track_features (track_id,danceability,energy,`key`,loudness,`mode`,speechiness,acousticness,instrumentalness,liveness,valence,tempo,time_signature) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (track_id,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,time_signature)
+    InsertCursor.execute(sql, val)
+
+index_queries = [
+
+
+    "CREATE INDEX idx_track_name ON tracks(track_name)",
+    "CREATE INDEX idx_release_year ON tracks(release_year)",
+    "CREATE INDEX idx_genre ON tracks(genre)",
+    "CREATE INDEX idx_popularity ON tracks(popularity)"
+]
+for query in index_queries:
+    InsertCursor.execute(query)
+
+MySQL_Performance.commit()
+
+end = time.perf_counter()
+
+print(f'Around {(end - start)/60} minutes')
+MySQL_InsertTime = end - start
+```
+
+    Around 9.450540866666659 minutes
+    
+
+Inserting Data to Cloud Cluster in MongoDB Atlas
+
+
+```python
+# Connection String
+Cloud_InsertPerformance_connection_string = 'mongodb+srv://giorgosf3_db_user:neofytos@projectspotify.8eqggrk.mongodb.net/?appName=ProjectSpotify'
+Cloud_InsertPerformance_Client = MongoClient(Cloud_InsertPerformance_connection_string)
+
+df = pd.read_csv("spotify_data.csv")
+df_shuffled = df.sample(frac=1).reset_index(drop=True)
+df = df_shuffled.drop('Unnamed: 0', axis=1)
+df = df[:1000000]
+
+
+docs = []
+
+for _, row in df.iterrows():
+    doc = {
+        "_id": row["track_id"],
+        "track_name": row["track_name"],
+        "artist_name": row["artist_name"],
+        "release_year": int(row["year"]),
+        "genre": row["genre"],
+        "popularity": int(row["popularity"]),
+        "duration_ms": int(row["duration_ms"]),
+        "metrics": {
+            "danceability": float(row["danceability"]),
+            "energy": float(row["energy"]),
+            "key": int(row["key"]),
+            "loudness": float(row["loudness"]),
+            "mode": int(row["mode"]),
+            "speechiness": float(row["speechiness"]),
+            "acousticness": float(row["acousticness"]),
+            "instrumentalness": float(row["instrumentalness"]),
+            "liveness": float(row["liveness"]),
+            "valence": float(row["valence"]),
+            "tempo": float(row["tempo"]),
+            "time_signature": int(row["time_signature"])
+        }
+    }
+    docs.append(doc)
+# Creating Database
+spotify = Cloud_InsertPerformance_Client.spotify
+# Create Database's collection
+Cloud_Collections = spotify.Cloud_Collections
+```
+
+
+```python
+start = time.perf_counter()
+# Create index
+Cloud_Collections.insert_many(docs)
+Cloud_Collections.create_index("artist_name")
+Cloud_Collections.create_index("release_year")
+Cloud_Collections.create_index("genre")
+Cloud_Collections.create_index("popularity")
+end = time.perf_counter()
+
+print(f'Around {((end - start)/60)} minutes')
+CloudMongoDB_InsertTime = end - start
+```
+
+    Around 2.471953376666837 minutes
+    
