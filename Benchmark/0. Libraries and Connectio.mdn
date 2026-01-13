@@ -1,3 +1,7 @@
+# Connection
+
+MY SQL Connection
+
 ```python
 import mysql.connector
 from pymongo import MongoClient
@@ -7,14 +11,8 @@ import pandas as pd
 import time
 import numpy as np
 ```
+
 ```python
-
-```
-
-# Connection
-
-MY SQL Connection
-
 
 ```python
 MySQL = mysql.connector.connect(
