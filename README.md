@@ -160,7 +160,7 @@ The cloud database will use the same schema as the local database but because of
 - popularity
 
 ## 5. Project
-This project makes 8 comparisons between the databases. Different type of queries are being designed and compare the database in each comparison phase.
+This project makes 8 comparisons between the databases. Different type of queries are being designed to compare the databases in each comparison phase. More queries could be used and added in the future for more accurate results and to test bigger range of queries
 ### Comparison 1.
 First the insertion time is being compared for each database
 ### Comparison 2 and 3.
@@ -179,4 +179,4 @@ The databases are being compared for Range Queries
 The databases are being compared for Aggregations
 ## 6. Project Reproducibility
 This project can easily be reproduced.
-All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases
+All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases.
