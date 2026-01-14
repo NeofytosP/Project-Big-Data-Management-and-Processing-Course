@@ -201,7 +201,7 @@ Then results are being visualized and conclusions based on the results
 [Results](Benchmark/8.Results-Conclusions.md)
 ## 6. Project Reproducibility
 This project can easily be reproduced.
-All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases. [Libraries](Benchmark/0.Libraries-and-Connection.md)
+All that is needed is to download the dataset from kaggle, install MySQL and MongoDB Development and install 2 libraries for each database, pymongo and mysql.connector. Also the Pandas library is needed to handle easier the dataset and the insertion in the databases. [Libraries](Benchmark/0.Libraries-and-Connection.md). Then create the 2 databases, adjust the connection strings to your databases and follow the code.
 
 ## 7. Youtube Video Link
 https://youtu.be/JJrhqdObQoo
