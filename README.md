@@ -205,3 +205,6 @@ All that is needed is to download the dataset from kaggle, install MySQL and Mon
 
 ## 7. Youtube Video Link
 https://youtu.be/JJrhqdObQoo
+
+## 8. Github repository
+https://github.com/NeofytosP/Project-Big-Data-Management-and-Processing-Course
